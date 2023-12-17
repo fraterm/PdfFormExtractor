@@ -116,8 +116,18 @@
             <!-- define a language-specific format -->
             <java>
               <!-- no need to specify files, inferred automatically, but you can if you want -->
-              <!-- can select a formatter to go in here later -->
+              <includes>
+                <include>src/main/java/**/*.java</include>
+                <include>src/test/java/**/*.java</include>
+              </includes>
+              <googleJavaFormat/>
+              <formatAnnotations/>
             </java>
+            <pom>
+              <includes>
+                <include>pom.xml</include>
+              </includes>
+            </pom>
             <markdown>
               <includes>
                 <!-- You have to set the target manually -->

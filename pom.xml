@@ -30,18 +30,11 @@
       <artifactId>pdfbox</artifactId>
       <version>3.0.0</version>
     </dependency>
-    <dependency> 
-      <groupId>org.jcommander</groupId>
-      <artifactId>jcommander</artifactId>
-      <version>1.83</version>
+    <dependency>
+      <groupId>info.picocli</groupId>
+      <artifactId>picocli</artifactId>
+      <version>4.7.5</version>
     </dependency>
-    <!-- argparse4j argument parsing library Library https://pdfbox.apache.org/3.0/ -->
-    <!-- <dependency>
-    <groupId>net.sourceforge.argparse4j</groupId>
-      <artifactId>argparse4j</artifactId>
-      <version>0.9.0</version>
-      </dependency>
-    -->
   </dependencies>
 
   <build>

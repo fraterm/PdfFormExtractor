@@ -11,6 +11,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
+    <fatjar.mainClass>net.approachzero.apps.pdfformextractor</fatjar.mainClass>
   </properties>
   <dependencies>
     <dependency>
@@ -25,6 +26,11 @@
       <version>2.41.1</version>
     </dependency>
     <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-shade-plugin</artifactId>
+      <version>3.5.1</version>
+    </dependency>
+    <dependency>
       <!-- PDFBox PDF Library https://pdfbox.apache.org/3.0/ -->
       <groupId>org.apache.pdfbox</groupId>
       <artifactId>pdfbox</artifactId>
@@ -36,30 +42,62 @@
       <version>4.7.5</version>
     </dependency>
   </dependencies>
+  <!-- Set up various Profiles Here Someday -->
   <build>
     <pluginManagement>
       <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- maven-assembly-plugin, see https://maven.apache.org/plugins/maven-assembly-plugin/usage.html -->
+        <!-- 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
-          <configuration>
-            <appendAssemblyId>false</appendAssemblyId>
-            <finalName>${appname}-${project.version}-${os.detected.classifier}</finalName>
-            <outputDirectory>${app.disttribution.directory}</outputDirectory>
-            <workDirectory>${project.build.directory}/assembly/work</workDirectory>
-            <skipAssembly>true</skipAssembly>
-            <descriptorRefs>
-              <descriptorRef>jar-with-dependencies</descriptorRef>
-            </descriptorRefs>
-          </configuration>
+          <version>3.3.0</version>
           <executions>
             <execution>
               <id>make-assembly</id>
               <phase>package</phase>
               <goals>
                 <goal>single</goal>
+              </goals>
+              <configuration>
+                <appendAssemblyId>false</appendAssemblyId>
+                <finalName>${appname}-${project.version}-${os.detected.classifier}</finalName>
+                <outputDirectory>${app.disttribution.directory}</outputDirectory>
+                <workDirectory>${project.build.directory}/assembly/work</workDirectory>
+                <skipAssembly>true</skipAssembly>
+                <descriptorRefs>
+                  <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+                <archive>
+                  <manifest>
+                    <mainClass>${fatjar.mainClass}</mainClass>
+                  </manifest>
+                </archive>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        -->
+        <!-- maven-shade-plugin, see https://maven.apache.org/plugins/maven-shade-plugin/usage.html -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.5.1</version>
+          <configuration>
+            <!-- put your configurations here -->
+            <transformers>
+              <!-- <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"> -->
+              <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                <mainClass>${fatjar.mainClass}</mainClass>
+              </transformer>
+            </transformers>
+          </configuration>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
               </goals>
             </execution>
           </executions>
@@ -90,7 +128,7 @@
             <archive>
               <manifest>
                 <addClasspath>true</addClasspath>
-                <mainClass>net.approachzero.apps.PdfFormExtractorApp</mainClass>
+                <mainClass>net.approachzero.apps.pdfformextractor</mainClass>
               </manifest>
             </archive>
           </configuration>
@@ -165,4 +203,5 @@
       </plugins>
     </pluginManagement>
   </build>
+  <!-- Profiles End Here IF we start using them -->
 </project>

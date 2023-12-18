@@ -13,7 +13,7 @@ import picocli.CommandLine.Parameters;
     version = "PdfFormExtractorApp 1.0",
     description = "Extracts PDF form data to text and other formats")
 /** Hello world! */
-public class PdfFormExtractorApp implements Callable<Integer> {
+public class pdfformextractor implements Callable<Integer> {
 
   @Parameters(index = "0", description = "Pdf File From which to Extract Form Data")
   private File file;
@@ -33,7 +33,7 @@ public class PdfFormExtractorApp implements Callable<Integer> {
   }
 
   public static void main(String[] args) {
-    int exitCode = new CommandLine(new PdfFormExtractorApp()).execute(args);
+    int exitCode = new CommandLine(new pdfformextractor()).execute(args);
     System.exit(exitCode);
   }
 }

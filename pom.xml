@@ -53,16 +53,16 @@
             <descriptorRefs>
               <descriptorRef>jar-with-dependencies</descriptorRef>
             </descriptorRefs>
-            </configuration>
+          </configuration>
           <executions>
             <execution>
               <id>make-assembly</id>
               <phase>package</phase>
               <goals>
                 <goal>single</goal>
-                </goals>
-              </execution>
-            </executions>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>

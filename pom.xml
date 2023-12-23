@@ -44,41 +44,9 @@
   </dependencies>
   <!-- Set up various Profiles Here Someday -->
   <build>
-    <pluginManagement>
+    <!-- <pluginManagement> APPARENTLY THIS BREAKS SHADE PLUGIN --> 
       <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
-        <!-- maven-assembly-plugin, see https://maven.apache.org/plugins/maven-assembly-plugin/usage.html -->
-        <!-- 
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.3.0</version>
-          <executions>
-            <execution>
-              <id>make-assembly</id>
-              <phase>package</phase>
-              <goals>
-                <goal>single</goal>
-              </goals>
-              <configuration>
-                <appendAssemblyId>false</appendAssemblyId>
-                <finalName>${appname}-${project.version}-${os.detected.classifier}</finalName>
-                <outputDirectory>${app.disttribution.directory}</outputDirectory>
-                <workDirectory>${project.build.directory}/assembly/work</workDirectory>
-                <skipAssembly>true</skipAssembly>
-                <descriptorRefs>
-                  <descriptorRef>jar-with-dependencies</descriptorRef>
-                </descriptorRefs>
-                <archive>
-                  <manifest>
-                    <mainClass>${fatjar.mainClass}</mainClass>
-                  </manifest>
-                </archive>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-        -->
         <!-- maven-shade-plugin, see https://maven.apache.org/plugins/maven-shade-plugin/usage.html -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -87,9 +55,12 @@
           <configuration>
             <!-- put your configurations here -->
             <transformers>
-              <!-- <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"> -->
-              <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+              <!-- <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer"> -->
+              <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                <mainClass>net.approachzero.apps.pdfformextractor</mainClass>
+                <!--
                 <mainClass>${fatjar.mainClass}</mainClass>
+                -->
               </transformer>
             </transformers>
           </configuration>
@@ -201,7 +172,7 @@
           </configuration>
         </plugin>
       </plugins>
-    </pluginManagement>
+    <!-- </pluginManagement> -->
   </build>
   <!-- Profiles End Here IF we start using them -->
 </project>
